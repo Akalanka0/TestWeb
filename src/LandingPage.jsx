@@ -6,7 +6,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [showReview, setShowReview] = useState(false);
-  const [reviews, setReviews] = useState([]); // reviews array state
+  const [reviews, setReviews] = useState([]);
   const [reviewText, setReviewText] = useState('');
   const [reviewName, setReviewName] = useState('');
 
@@ -43,25 +43,19 @@ const LandingPage = () => {
     }
   ];
 
-  // Fetch reviews from backend on mount
   useEffect(() => {
     fetch('http://localhost:5000/api/reviews')
       .then(res => res.json())
       .then(data => {
-        console.log("Fetched data:", data);
         if (Array.isArray(data)) {
           setReviews(data);
         } else if (Array.isArray(data.reviews)) {
           setReviews(data.reviews);
         } else {
-          console.error("Invalid reviews format:", data);
           setReviews([]);
         }
       })
-      .catch(err => {
-        console.error("Failed to fetch reviews:", err);
-        setReviews([]);
-      });
+      .catch(() => setReviews([]));
   }, []);
 
   const handleCardClick = (path) => {
@@ -70,13 +64,11 @@ const LandingPage = () => {
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
-
     const newReview = {
       name: reviewName.trim() || 'Anonymous',
       review: reviewText.trim()
     };
-
-    if (!newReview.review) return; // Don't submit empty review
+    if (!newReview.review) return;
 
     try {
       const response = await fetch('http://localhost:5000/api/reviews', {
@@ -84,9 +76,8 @@ const LandingPage = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newReview)
       });
-
       if (response.ok) {
-        setReviews(prev => [newReview, ...prev]); // add new review to list
+        setReviews(prev => [newReview, ...prev]);
         setReviewText('');
         setReviewName('');
         setShowReview(false);
@@ -94,8 +85,7 @@ const LandingPage = () => {
       } else {
         alert('Failed to save review. Please try again.');
       }
-    } catch (error) {
-      console.error(error);
+    } catch {
       alert('Error submitting review.');
     }
   };
@@ -132,7 +122,6 @@ const LandingPage = () => {
         ))}
       </div>
 
-      {/* About section */}
       <section className="about-us">
         <h2>About DreamStay Hotel</h2>
         <p>
@@ -146,7 +135,6 @@ const LandingPage = () => {
         </p>
       </section>
 
-      {/* Leave a Review button */}
       <div className="review-button-container">
         {!showReview && (
           <button
@@ -158,12 +146,10 @@ const LandingPage = () => {
         )}
       </div>
 
-      {/* Review form */}
       {showReview && (
         <section className="review-us">
           <h2>Review Us</h2>
           <p>We’d love to hear about your stay! Please leave your feedback below.</p>
-
           <form onSubmit={handleReviewSubmit}>
             <input
               type="text"
@@ -173,7 +159,6 @@ const LandingPage = () => {
               value={reviewName}
               onChange={(e) => setReviewName(e.target.value)}
             />
-
             <textarea
               name="review"
               rows="4"
@@ -182,8 +167,7 @@ const LandingPage = () => {
               className="review-textarea"
               value={reviewText}
               onChange={(e) => setReviewText(e.target.value)}
-            ></textarea>
-
+            />
             <button type="submit" className="review-submit-btn">
               Submit Review
             </button>
@@ -191,7 +175,6 @@ const LandingPage = () => {
         </section>
       )}
 
-      {/* Display reviews below form */}
       <section className="reviews-list">
         <h2>Guest Reviews</h2>
         {reviews.length === 0 ? (
