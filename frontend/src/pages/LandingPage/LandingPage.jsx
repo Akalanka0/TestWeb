@@ -125,12 +125,12 @@ const LandingPage = () => {
       <section className="about-us">
         <h2>About DreamStay Hotel</h2>
         <p>
-          At DreamStay Hotel, we pride ourselves on providing an unforgettable guest experience. 
-          From comfortable rooms to personalized services and exclusive offers, your satisfaction is our top priority. 
+          At DreamStay Hotel, we pride ourselves on providing an unforgettable guest experience.
+          From comfortable rooms to personalized services and exclusive offers, your satisfaction is our top priority.
           Whether you are visiting for business or leisure, our dedicated team ensures your stay is relaxing and memorable.
         </p>
         <p>
-          Explore our website to book rooms, check your bookings, or discover special promotions. 
+          Explore our website to book rooms, check your bookings, or discover special promotions.
           We look forward to welcoming you soon!
         </p>
       </section>
