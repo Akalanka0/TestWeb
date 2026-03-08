@@ -1,6 +1,7 @@
 {
     "name": "dreamstay-hotel",
     "version": "1.0.0",
+    "description": "A full-stack test web application for hotel management built with the MERN stack.",
     "private": true,
     "scripts": {
         "start:frontend": "npm start --prefix frontend",
