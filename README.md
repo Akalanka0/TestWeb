@@ -1,6 +1,6 @@
 # DreamStay Hotel - Full Stack Web Application
 
-A premium hotel management and booking system built with the MERN stack (MongoDB, Express, React, Node.js).
+A hotel management and booking system built with the MERN stack (MongoDB, Express, React, Node.js).
 
 ## Project Structure
 
